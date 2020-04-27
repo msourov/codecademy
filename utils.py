@@ -6,61 +6,75 @@ def get_size(dt):
     res = input('What size drink can I get for you? \n[a] Small \n[b] Medium \n[c] Large \n> ')
     if dt == 'brewed coffee':
         if res == 'a':
-            return 'small', 2
+            return 'small', dt, 2
         elif res == 'b':
-            return 'medium', 3
+            return 'medium', dt, 3
         elif res == 'c':
-            return 'large', 4
+            return 'large', dt, 4
         else:
             print_message()
             return get_size(dt)
     elif dt == 'mocha':
         if res == 'a':
-            return 'small', 3
+            mocha_type, price1 = order_mocha(3)
+            return 'small', mocha_type, price1
         elif res == 'b':
-            return 'medium', 3.5
+            mocha_type, price1 = order_mocha(3.5)
+            return 'medium', mocha_type, price1
         elif res == 'c':
-            return 'large', 4
+            mocha_type, price1 = order_mocha(4)
+            return 'large', mocha_type, price1
         else:
             print_message()
             return get_size(dt)
     elif dt == 'latte':
         if res == 'a':
-            return 'small', 3.5
+            latte_add_on, price1 = order_latte(3.5)
+            return 'small', latte_add_on, price1
         elif res == 'b':
-            return 'medium', 4
+            latte_add_on, price1 = order_latte(4)
+            return 'medium', latte_add_on, price1
         elif res == 'c':
-            return 'large', 4.5
+            latte_add_on, price1 = order_latte(4.5)
+            return 'large', latte_add_on, price1
         else:
             print_message()
             return get_size(dt)
 
 
-def order_mocha():
+def order_mocha(price1):
     while True:
         res = input('Would you like to try our limited-edition peppermint mocha? \n'
                     '[a] Sure! (Costs +1$)\n[b] Maybe next time!\n[d] Exit \n>')
         if res == 'a':
-            return 'peppermint mocha', 1
+            return 'peppermint mocha', price1+1
         elif res == 'b':
-            return 'mocha', 0
+            return 'mocha', price1+0
         elif res == 'exit':
             exit()
         else:
-            return order_mocha()
+            return order_mocha(price1)
         print_message()
 
 
-def order_latte():
+def order_latte(price1):
     res = input('And what kind of milk for your latte? \n[a] 2% milk \n[b] Non-fat milk \n[c] Soy milk \n> ')
 
     if res == 'a':
-        return 'latte', 0.5
+        return 'latte', price1+0.5
     elif res == 'b':
-        return 'non-fat latte', 0.0
+        return 'non-fat latte', price1+0.0
     elif res == 'c':
-        return 'soy latte', 1
+        return 'soy latte', price1+1
     else:
         print_message()
-        return order_latte()
+        return order_latte(price1)
 
+
+price = 0
+
+
+def total_price(val):
+    global price
+    price += val
+    return price
