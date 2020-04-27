@@ -1,4 +1,5 @@
-from utils import print_message, get_size, order_latte,order_mocha, total_price
+from utils import print_message, get_size, order_latte,order_mocha
+bill = []
 
 
 def coffee_bot():
@@ -8,17 +9,27 @@ def coffee_bot():
     while order_drink == 'y':
         drink_type = get_drink_type()
         size, price = get_size(drink_type)
-        tp = total_price(price)
-        drink = '{} {}'.format(size, drink_type)
+        global bill
+        bill.append(price)
+        if drink_type == 'mocha':
+            add1, price1 = order_mocha()
+            bill.append(price1)
+        elif drink_type == 'latte':
+            add1, price2 = order_latte()
+            bill.append(price2)
+        else:
+            add1 = drink_type
+        pay = sum(bill)
+        drink = '{} {}'.format(size, add1)
         print('Alright, that\'s a {}!'.format(drink))
-        print('That will cost {}$'.format(tp))
+        print('That will cost {}$'.format(pay))
         drinks.append(drink)
-        while True:
+        while 'y':
             order_drink = input('Would you like to order another drink? (y/n) \n>')
             if order_drink in ['y', 'n']:
                 break
     name = input('Can I get your name please? \n> ')
-    print('Please pay {} dollars'.format(tp))
+    print('Please pay {} dollars'.format(pay))
     print('Thanks, {}! Your order will be ready shortly.'.format(name))
     print('Okay, so I have:\n')
     for i in drinks:
