@@ -13,34 +13,35 @@ def get_size(dt):
             return 'large', 4
         else:
             print_message()
-            return get_size()
+            return get_size(dt)
     elif dt == 'mocha':
         if res == 'a':
-            return 'small', order_mocha(3)
+            return 'small', 3
         elif res == 'b':
-            return 'medium', order_mocha(3.5)
+            return 'medium', 3.5
         elif res == 'c':
-            return 'large', order_mocha(4)
+            return 'large', 4
         else:
             print_message()
-            return get_size()
+            return get_size(dt)
     elif dt == 'latte':
         if res == 'a':
-            return 'small', order_latte(3.5)
+            return 'small', 3.5
         elif res == 'b':
-            return 'medium', order_latte(4)
+            return 'medium', 4
         elif res == 'c':
-            return 'large', order_latte(4.5)
+            return 'large', 4.5
         else:
             print_message()
-            return get_size()
+            return get_size(dt)
 
-def order_mocha(price):
+
+def order_mocha():
     while True:
         res = input('Would you like to try our limited-edition peppermint mocha? \n'
                     '[a] Sure! (Costs +1$)\n[b] Maybe next time!\n[d] Exit \n>')
         if res == 'a':
-            return 'peppermint mocha', price+1
+            return 'peppermint mocha', 1
         elif res == 'b':
             return 'mocha', 0
         elif res == 'exit':
@@ -49,22 +50,17 @@ def order_mocha(price):
             return order_mocha()
         print_message()
 
-def order_latte(price):
+
+def order_latte():
     res = input('And what kind of milk for your latte? \n[a] 2% milk \n[b] Non-fat milk \n[c] Soy milk \n> ')
 
     if res == 'a':
-        return 'latte', price+0.5
+        return 'latte', 0.5
     elif res == 'b':
-        return 'non-fat latte', price+0.0
+        return 'non-fat latte', 0.0
     elif res == 'c':
-        return 'soy latte', price+1
+        return 'soy latte', 1
     else:
         print_message()
         return order_latte()
 
-
-price = 0
-def total_price(val) :
-    global price
-    price = price+val
-    return price
